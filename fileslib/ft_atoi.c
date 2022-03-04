@@ -12,18 +12,26 @@
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+static int	ft_isnotnumber(const char *nptr)
 {
 	int	i;
-	int	neg;
-	int	res;
 
 	i = 0;
-	neg = 1;
-	res = 0;
 	while ((nptr[i] == ' ') || (nptr[i] == '\n') || (nptr[i] == '\t')
 		|| (nptr[i] == '\v') || (nptr[i] == '\f') || (nptr[i] == '\r'))
 		i++;
+	return (i++);
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int			i;
+	int			neg;
+	long long	res;
+
+	neg = 1;
+	res = 0;
+	i = ft_isnotnumber(nptr);
 	if (nptr[i] == '-')
 	{
 		neg = -1;
@@ -31,8 +39,12 @@ int	ft_atoi(const char *nptr)
 	}
 	else if (nptr[i] == '+')
 		i++;
-	while ((nptr[i] >= '0') && (nptr[i] <= '9'))
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
+		if (res < 0 && neg == 1)
+			return (-1);
+		if (res < 0 && neg == -1)
+			return (0);
 		res = (res * 10) + (nptr[i] - '0');
 		i++;
 	}

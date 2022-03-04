@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-size_t	ft_getstr(char *str, long nbr, size_t len)
+static size_t	ft_getstr(char *str, long nbr, size_t len)
 {
 	while (nbr > 0)
 	{
@@ -22,7 +22,7 @@ size_t	ft_getstr(char *str, long nbr, size_t len)
 	return (len);
 }
 
-size_t	ft_getlen(int n, size_t len)
+static size_t	ft_getlen(int n, size_t len)
 {
 	while (n)
 	{
